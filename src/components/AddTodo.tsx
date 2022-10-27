@@ -31,12 +31,12 @@ const AddTodo = () => {
 
   return (
     <>
-      <div>
+      {/* <div>
         <h2> Select the date</h2>
         <input
           type="date"
         />
-      </div>
+      </div> */}
       <br></br>
       <div>
         <form onSubmit={handleFormSubmit}>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteTodo, updateTodo } from "../actions";
 
-const TodoItem = ({ task }: any) => {
+const TodoItemDate = ({ task, selectedDate }: any) => {
   const [isUpdate, setIsUpdate] = useState(false);
   const dispatch = useDispatch();
   const [updatedText, setUpdatedText] = useState('');
@@ -34,16 +34,17 @@ const TodoItem = ({ task }: any) => {
           <button onClick={() => dispatch(deleteTodo(task.id))}>Delete</button>
         </div>
       </>
-
     );
   };
 
   return (
     <div>
       <br></br>
-      <div>{isUpdate ? renderForm() : renderItem()}</div>
+      <>
+        {selectedDate === task.date ? <div>{isUpdate ? renderForm() : renderItem()}</div> : null}
+      </>
     </div>
   );
 };
 
-export default TodoItem;
+export default TodoItemDate;
