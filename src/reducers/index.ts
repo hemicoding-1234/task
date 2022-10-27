@@ -1,64 +1,45 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import type { RootState } from "../store";
-import cuid from "cuid";
+import { combineReducers } from "redux";
+import { ActionTypes } from "../actions";
+import { eachTask } from "../components/AddTodo";
 
-interface Task {
-  id: string;
-  isEdit: boolean;
-  text: string;
-  date: string;
-}
-
-interface TasksSliceState {
-  tasks: Task[];
-  selectedDate: string | null;
-}
-
-const initialState: TasksSliceState = {
-  tasks: [],
-  selectedDate: null,
+const initialState = {
+  data: [],
+  date: ''
 };
 
-export const tasksSlice = createSlice({
-  name: "tasks",
-  initialState,
-  reducers: {
-    addTask: (state, action: PayloadAction<{ text: string; date: string }>) => {
-      state.tasks = [
-        ...state.tasks,
-        {
-          id: cuid(),
-          text: action.payload.text,
-          isEdit: false,
-          date: action.payload.date,
-        },
-      ];
-    },
-    deleteTask: (state, action: PayloadAction<string>) => {
-      state.tasks = state.tasks.filter(
-        ({ id }) => id !== action.payload.toString()
-      );
-    },
+export interface TaskArray {
+  data: eachTask[],
+  date: string
+}
 
-    editTask: (
-      state,
-      action: PayloadAction<{ id: string; text: string; index: number }>
-    ) => {
-      state.tasks[action.payload.index] = {
-        ...state.tasks[action.payload.index],
-        text: action.payload.text,
+const todos = (state = initialState, action: ActionTypes) => {
+  switch (action.type) {
+    case "ADD_TODO":
+      return {
+        ...state,
+        data: [...state.data, action.payload],
+        date: action.payload.date
       };
-    },
+    case "DELETE_TODO":
+      return {
+        ...state,
+        data: [...state.data.filter((todo: eachTask) => todo.id !== action.id)],
+      };
+    case "UPDATE_TODO":
+      return {
+        ...state,
+        data: [
+          ...state.data.filter((todo: eachTask) => todo.id !== action.id),
+          { task: action.task, id: action.id, date: action.date },
+        ],
+      };
+    default:
+      return state;
+  }
+};
 
-    showOnDate: (state, action: PayloadAction<string>) => {
-      state.selectedDate = action.payload;
-    },
-  },
+const rootReducer = combineReducers({
+  todos,
 });
 
-export const { addTask, deleteTask, editTask, showOnDate } =
-  tasksSlice.actions;
-
-export const selectCount = (state: RootState) => state.tasks;
-
-export default tasksSlice.reducer;
+export default rootReducer;

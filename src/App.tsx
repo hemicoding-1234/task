@@ -1,11 +1,12 @@
-import NewTask from "./components/NewTask";
-import TaskList from "./components/TaskList";
+import AddTodo from "./components/AddTodo";
+import TodoList from "./components/TodoList";
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <NewTask />
-      <TaskList />
+    <div className='App'>
+      <h1>Task List</h1>
+      <AddTodo />
+      <TodoList />
     </div>
   );
 }
