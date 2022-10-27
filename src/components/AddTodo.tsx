@@ -19,14 +19,10 @@ const AddTodo = () => {
   }
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // we dont want the page to reload as soon as it is submitted
-
+    e.preventDefault();
     dispatch(addTodo({ task: text, id: cuid(), date: todoDate }))
-    // add to the list of tasks 
     setText('');
     setTodoDate('');
-    // once the task is added we make sure to allow the new task to be added.
-
   }
 
   const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {

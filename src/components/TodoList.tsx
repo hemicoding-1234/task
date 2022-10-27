@@ -1,4 +1,3 @@
-import React from "react";
 import TodoItem from "./TodoItem";
 import { useSelector } from "react-redux";
 // import { eachTask } from "./AddTodo";

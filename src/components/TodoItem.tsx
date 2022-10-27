@@ -13,19 +13,15 @@ const TodoItem = ({ task }: any) => {
   const dispatch = useDispatch();
   const [updatedText, setUpdatedText] = useState('');
 
-  // const text = useRef(null);
-
   function editItemToState(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     dispatch(updateTodo({ task: updatedText, id: task.id, date: task.date }));
     setIsUpdate(false);
-    // text.current = null;
   }
 
   const renderForm = () => {
     return (
       <form onSubmit={editItemToState}>
-        {/* <input ref={text} type='text' defaultValue={task.task} /> */}
         <input onChange={e => setUpdatedText(e.target.value)} type='text' defaultValue={task.task} />
         <button type='submit'>Edit Todo</button>
       </form>
