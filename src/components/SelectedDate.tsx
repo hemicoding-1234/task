@@ -1,21 +1,22 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import TodoItemDate from "./TodoItem";
+import TodoItemDate from "./TodoItemDate";
 
 const SelectedDate = () => {
   const [selectedDate, setSelectedDate] = useState('');
   const taskobj = useSelector((state: any) => state.todos.data);
-  console.log(taskobj);
+  // console.log(taskobj);
+
+  let value = '';
+  const handleDate = (event: React.ChangeEvent<HTMLInputElement>) => {
+    value = event.target.value;
+    setSelectedDate(value);
+    // console.log('selected date is: ', value);
+  }
 
   const matchedDatetaskobj = taskobj.map((task: any) => {
     return <TodoItemDate key={task.id} task={task} selectedDate={selectedDate} />;
   })
-
-  const handleDate = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    setSelectedDate(event.target.value);
-    console.log('selected date is: ', selectedDate);
-  }
 
   return (
     <>
