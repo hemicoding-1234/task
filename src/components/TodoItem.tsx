@@ -30,8 +30,8 @@ const TodoItem = ({ task }: any) => {
         </div>
         <div>
           Task: {task.task}
-          <button onClick={() => setIsUpdate(true)}>Edit</button>
-          <button onClick={() => dispatch(deleteTodo(task.id))}>Delete</button>
+          <button className="ui button" onClick={() => setIsUpdate(true)}>Edit</button>
+          <button className="ui button" onClick={() => dispatch(deleteTodo(task.id))}>Delete</button>
         </div>
       </>
 

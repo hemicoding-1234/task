@@ -15,7 +15,7 @@ const App: React.FC = () => {
       <h1>Task List</h1>
       <AddTodo />
       <br></br>
-      <button onClick={showAllTask}>Show all Task</button>
+      <button className="ui button" onClick={showAllTask}>Show all Task</button>
       {check ? <TodoList /> : <br></br>}
       <br></br>
       <SelectedDate />
