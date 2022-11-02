@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import TodoItemDate from "./TodoItemDate";
+// import "./SelectedDate.css";
 
 const SelectedDate = () => {
   const [selectedDate, setSelectedDate] = useState('');
@@ -13,23 +14,32 @@ const SelectedDate = () => {
   }
 
   const matchedDatetaskobj = taskobj.map((task: any) => {
-    return <TodoItemDate key={task.id} task={task} selectedDate={selectedDate} />;
+    return (
+      <div id="selectedDateTask">
+        <TodoItemDate key={task.id} task={task} selectedDate={selectedDate} />
+      </div>
+    )
   })
 
   return (
-    <>
+    <div id="hi">
       <div>
         <h2> Select the date</h2>
-        <input
-          type="date"
-          id="calendar"
-          onChange={handleDate}
-        />
+        <div className="ui calendar" id="dateDiv">
+          <div className="ui input left icon">
+            <i className="calendar icon"></i>
+            <input
+              type="date"
+              id="calendar"
+              onChange={handleDate}
+            />
+          </div>
+        </div>
       </div>
       <div>
         {matchedDatetaskobj}
       </div>
-    </>
+    </div>
   );
 }
 

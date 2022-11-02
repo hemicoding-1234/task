@@ -2,7 +2,7 @@ import AddTodo from "./components/AddTodo";
 import TodoList from "./components/TodoList";
 import SelectedDate from "./components/SelectedDate";
 import { useState } from "react";
-
+import "./App.css"
 
 const App: React.FC = () => {
   const [check, setCheck] = useState(false);
@@ -12,13 +12,21 @@ const App: React.FC = () => {
   }
   return (
     <div className='App'>
-      <h1>Task List</h1>
-      <AddTodo />
+      <h1 id="appHeading">Task List</h1>
+      <div id="AddTodoDiv">
+        <AddTodo />
+      </div>
       <br></br>
-      <button className="ui button" onClick={showAllTask}>Show all Task</button>
-      {check ? <TodoList /> : <br></br>}
+      <div id="ShowAllTaskContainer">
+        <button className="ui button" onClick={showAllTask}>Show all Task</button>
+        <br></br>
+        {check ? <TodoList /> : <br></br>}
+        <br></br>
+      </div>
       <br></br>
-      <SelectedDate />
+      <div id="ShowSelectedTaskContainer">
+        <SelectedDate />
+      </div>
     </div>
   );
 }

@@ -29,36 +29,10 @@ const AddTodo = () => {
     setTodoDate(event.target.value);
   }
 
-  // return (
-  //   <form className="ui form" onSubmit={handleFormSubmit}>
-  //     <div className="ui calendar" id="example1">
-  //       <div className="ui input left icon">
-  //         <i className="calendar icon"></i>
-  //         <input
-  //           type="date"
-  //           onChange={handleDateChange}
-  //           value={todoDate}
-  //         />
-  //       </div>
-  //     </div>
-  //     <div className="ui input focus">
-  //       <input
-  //         type="text"
-  //         placeholder="Add the Task"
-  //         onChange={(e) => handleInputChange(e)}
-  //         value={text}
-  //       />
-  //     </div>
-  //     <div>
-  //       <button className="ui button" type="submit">Add The Task List</button>
-  //     </div>
-  //   </form>
-  // )
   return (
-    <>
-      <br></br>
-      <div>
-        <form onSubmit={handleFormSubmit}>
+    <div>
+      <form onSubmit={handleFormSubmit}>
+        <div>
           <div className="ui calendar" id="example1">
             <div className="ui input left icon">
               <i className="calendar icon"></i>
@@ -77,11 +51,10 @@ const AddTodo = () => {
               value={text}
             />
           </div>
-          <button className="ui button" type="submit">Add The Task List</button>
-        </form>
-      </div>
-    </>
-
+        </div>
+        <button className="ui button" type="submit">Add The Task List</button>
+      </form>
+    </ div>
   )
 }
 

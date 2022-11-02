@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteTodo, updateTodo } from "../actions";
+import "./TodoItem.css";
 
 const TodoItem = ({ task }: any) => {
   const [isUpdate, setIsUpdate] = useState(false);
@@ -15,16 +16,24 @@ const TodoItem = ({ task }: any) => {
 
   const renderForm = () => {
     return (
-      <form onSubmit={editItemToState}>
-        <input onChange={e => setUpdatedText(e.target.value)} type='text' defaultValue={task.task} />
-        <button type='submit'>Edit Todo</button>
-      </form>
+      <div id="EditTodoItem">
+        <form onSubmit={editItemToState}>
+          <div className="ui input focus">
+            <input
+              onChange={e => setUpdatedText(e.target.value)}
+              type="text"
+              defaultValue={task.task}
+            />
+          </div>
+          <button className="ui button" type='submit'>Edit Todo</button>
+        </form>
+      </div>
     );
   };
 
   const renderItem = () => {
     return (
-      <>
+      <div id="renderTodoItem">
         <div>
           Date: {task.date}
         </div>
@@ -33,14 +42,12 @@ const TodoItem = ({ task }: any) => {
           <button className="ui button" onClick={() => setIsUpdate(true)}>Edit</button>
           <button className="ui button" onClick={() => dispatch(deleteTodo(task.id))}>Delete</button>
         </div>
-      </>
-
+      </ div>
     );
   };
 
   return (
     <div>
-      <br></br>
       <div>{isUpdate ? renderForm() : renderItem()}</div>
     </div>
   );

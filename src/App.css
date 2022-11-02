@@ -1,0 +1,40 @@
+#appHeading {
+  background-color: beige;
+  color: black;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  border: solid;
+  border-color: green;
+  border-radius: 0.5em;
+  border-width: 0.1.2em;
+  padding: 0.5em;
+}
+
+#AddTodoDiv {
+  border: solid;
+  border-color: green;
+  border-radius: 0.5em;
+  display: flex;
+  justify-content: center;
+  justify-items: auto;
+  justify-self: auto;
+  padding: 1em;
+}
+
+#ShowAllTaskContainer {
+  border: solid;
+  border-color: green;
+  border-radius: 0.5em;
+  padding: 1em;
+  /* display: flex;
+  justify-content: center;
+  justify-items: center; */
+}
+
+#ShowSelectedTaskContainer {
+  border: solid;
+  border-color: green;
+  border-radius: 0.5em;
+  padding: 1em;
+}
