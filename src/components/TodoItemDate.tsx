@@ -7,6 +7,12 @@ const TodoItemDate = ({ task, selectedDate }: any) => {
   const [isUpdate, setIsUpdate] = useState(false);
   const dispatch = useDispatch();
   const [updatedText, setUpdatedText] = useState('');
+  const [editFlag, setEditFlag] = useState(true);
+  const currentDate = new Date().toISOString().split("T")[0];
+
+  if (task.date < currentDate) {
+    setEditFlag(false);
+  }
 
   function editItemToState(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -39,7 +45,7 @@ const TodoItemDate = ({ task, selectedDate }: any) => {
         </div>
         <div>
           Task: {task.task}
-          <button className="ui button" onClick={() => setIsUpdate(true)}>Edit</button>
+          {editFlag ? <button className="ui button" onClick={() => setIsUpdate(true)}>Edit</button> : <button className="ui button" disabled onClick={() => setIsUpdate(true)}>Edit</button>}
           <button className="ui button" onClick={() => dispatch(deleteTodo(task.id))}>Delete</button>
         </div>
       </ div>

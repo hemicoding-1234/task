@@ -13,6 +13,7 @@ const AddTodo = () => {
   const [text, setText] = useState('');
   const [todoDate, setTodoDate] = useState('');
   const dispatch = useDispatch();
+  const currentDate = new Date().toISOString().split("T")[0];
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
@@ -20,9 +21,13 @@ const AddTodo = () => {
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(addTodo({ task: text, id: cuid(), date: todoDate }))
-    setText('');
-    setTodoDate('');
+    if (todoDate < currentDate) {
+      alert("Please enter correct date");
+    } else {
+      dispatch(addTodo({ task: text, id: cuid(), date: todoDate }))
+      setText('');
+      setTodoDate('');
+    }
   }
 
   const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
