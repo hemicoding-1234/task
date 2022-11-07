@@ -9,7 +9,7 @@ interface UpdateTodoInterface {
   type: "UPDATE_TODO",
   task: string,
   id: string,
-  date: string
+  date: string,
 }
 
 interface DeleteTodoInterface {
@@ -17,7 +17,14 @@ interface DeleteTodoInterface {
   id: string
 }
 
-export type ActionTypes = AddTodoInterface | UpdateTodoInterface | DeleteTodoInterface;
+interface OnDopInterface {
+  type: "ON_DROP",
+  task: string
+  id: string,
+  date: string
+}
+
+export type ActionTypes = AddTodoInterface | UpdateTodoInterface | DeleteTodoInterface | OnDopInterface;
 
 export const addTodo = (payload: eachTask): AddTodoInterface => ({
   type: "ADD_TODO",
@@ -35,3 +42,15 @@ export const updateTodo = ({ task, id, date }: eachTask) => ({
   id,
   date
 });
+
+// export const onDrop = ({ task, id, date }: eachTask) => ({
+//   type: "ON_DROP",
+//   task,
+//   id,
+//   date
+// })
+
+export const onDrop = (id: string) => ({
+  type: "ON_DROP",
+  id,
+})

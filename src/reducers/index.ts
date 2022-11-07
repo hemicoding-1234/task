@@ -4,12 +4,14 @@ import { eachTask } from "../components/AddTodo";
 
 const initialState = {
   data: [],
-  date: ''
+  date: '',
+  status: 'incomplete'
 };
 
 export interface TaskArray {
   data: eachTask[],
-  date: string
+  date: string,
+  status: string
 }
 
 const todos = (state = initialState, action: ActionTypes) => {
@@ -18,7 +20,8 @@ const todos = (state = initialState, action: ActionTypes) => {
       return {
         ...state,
         data: [...state.data, action.payload],
-        date: action.payload.date
+        date: action.payload.date,
+        status: 'incomplete'
       };
     case "DELETE_TODO":
       return {
@@ -33,6 +36,11 @@ const todos = (state = initialState, action: ActionTypes) => {
           { task: action.task, id: action.id, date: action.date },
         ],
       };
+    case "ON_DROP":
+      const getSelectedDate = state.data.filter((todo: eachTask) => todo.id === action.id);
+      return {
+        getSelectedDate
+      }
     default:
       return state;
   }

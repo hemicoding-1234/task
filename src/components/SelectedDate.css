@@ -1,4 +1,4 @@
-#selectedDateTask {
+/* #selectedDateTask {
   border: solid;
   border-color: orange;
   border-radius: 1em;
@@ -11,4 +11,10 @@
 #dateDiv {
   padding: 0.5em;
 
+} */
+
+#completedTask {
+  padding: 1em;
+  border: solid;
+  border-color: orange;
 }

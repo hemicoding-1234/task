@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteTodo, updateTodo } from "../actions";
-// import "./TodoItemDate.css";
+import "./TodoItemDate.css";
 
 const TodoItemDate = ({ task, selectedDate }: any) => {
   const [isUpdate, setIsUpdate] = useState(false);
@@ -18,6 +18,11 @@ const TodoItemDate = ({ task, selectedDate }: any) => {
     e.preventDefault();
     dispatch(updateTodo({ task: updatedText, id: task.id, date: task.date }));
     setIsUpdate(false);
+  }
+
+  const dragStared = (e: React.DragEvent<HTMLDivElement>, id: string) => {
+    console.log('drag started')
+    e.dataTransfer.setData("id", id)
   }
 
   const renderForm = () => {
@@ -54,10 +59,12 @@ const TodoItemDate = ({ task, selectedDate }: any) => {
 
   return (
     <div>
-      <br></br>
-      <>
-        {selectedDate === task.date ? <div>{isUpdate ? renderForm() : renderItem()}</div> : null}
-      </>
+      <div draggable onDragStart={(e) => dragStared(e, task.id)}>
+        <br></br>
+        <>
+          {selectedDate === task.date ? <div>{isUpdate ? renderForm() : renderItem()}</div> : null}
+        </>
+      </div>
     </div>
   );
 };
