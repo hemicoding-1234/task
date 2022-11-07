@@ -10,7 +10,7 @@ const TodoItem = ({ task }: any) => {
 
   function editItemToState(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    dispatch(updateTodo({ task: updatedText, id: task.id, date: task.date }));
+    dispatch(updateTodo({ task: updatedText, id: task.id, date: task.date, status: task.status }));
     setIsUpdate(false);
   }
 
@@ -35,7 +35,7 @@ const TodoItem = ({ task }: any) => {
     return (
       <div id="renderTodoItem">
         <div>
-          Date: {task.date}
+          Date: {task.date} Status: {task.status}
         </div>
         <div>
           Task: {task.task}

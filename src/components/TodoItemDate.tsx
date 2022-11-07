@@ -16,7 +16,7 @@ const TodoItemDate = ({ task, selectedDate }: any) => {
 
   function editItemToState(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    dispatch(updateTodo({ task: updatedText, id: task.id, date: task.date }));
+    dispatch(updateTodo({ task: updatedText, id: task.id, date: task.date, status: task.status }));
     setIsUpdate(false);
   }
 

@@ -1,4 +1,5 @@
 import { eachTask } from "../components/AddTodo";
+// import {enum } from "./enums"
 
 interface AddTodoInterface {
   type: "ADD_TODO",
@@ -10,6 +11,7 @@ interface UpdateTodoInterface {
   task: string,
   id: string,
   date: string,
+  status: string
 }
 
 interface DeleteTodoInterface {
@@ -36,11 +38,12 @@ export const deleteTodo = (id: string): DeleteTodoInterface => ({
   id,
 });
 
-export const updateTodo = ({ task, id, date }: eachTask) => ({
+export const updateTodo = ({ task, id, date, status }: eachTask) => ({
   type: "UPDATE_TODO",
   task,
   id,
-  date
+  date,
+  status
 });
 
 // export const onDrop = ({ task, id, date }: eachTask) => ({

@@ -33,13 +33,17 @@ const todos = (state = initialState, action: ActionTypes) => {
         ...state,
         data: [
           ...state.data.filter((todo: eachTask) => todo.id !== action.id),
-          { task: action.task, id: action.id, date: action.date },
+          { task: action.task, id: action.id, date: action.date, status: action.status },
         ],
       };
     case "ON_DROP":
-      const getSelectedDate = state.data.filter((todo: eachTask) => todo.id === action.id);
+      // const getSelectedDate = state.data.filter((todo: eachTask) => todo.id === action.id);
       return {
-        getSelectedDate
+        ...state,
+        data: [
+          ...state.data.filter((todo: eachTask) => todo.id !== action.id),
+          { task: action.task, id: action.id, date: action.date, status: 'completed' },
+        ],
       }
     default:
       return state;

@@ -6,7 +6,8 @@ import cuid from "cuid";
 export interface eachTask {
   task: string
   id: string,
-  date: string
+  date: string,
+  status: string
 }
 
 const AddTodo = () => {
@@ -24,7 +25,7 @@ const AddTodo = () => {
     if (todoDate < currentDate) {
       alert("Please enter correct date");
     } else {
-      dispatch(addTodo({ task: text, id: cuid(), date: todoDate }))
+      dispatch(addTodo({ task: text, id: cuid(), date: todoDate, status: 'incomplete' }))
       setText('');
       setTodoDate('');
     }
