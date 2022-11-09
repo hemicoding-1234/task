@@ -14,7 +14,7 @@ export interface TaskArray {
   status: string
 }
 
-const todos = (state = initialState, action: ActionTypes) => {
+const todos = (state: TaskArray = initialState, action: ActionTypes) => {
   switch (action.type) {
     case "ADD_TODO":
       return {
@@ -29,6 +29,8 @@ const todos = (state = initialState, action: ActionTypes) => {
         data: [...state.data.filter((todo: eachTask) => todo.id !== action.id)],
       };
     case "UPDATE_TODO":
+      const getSelectedDate = state.data.filter((todo: eachTask) => todo.id === action.id);
+      console.log('selected date is: ', getSelectedDate)
       return {
         ...state,
         data: [
@@ -37,12 +39,21 @@ const todos = (state = initialState, action: ActionTypes) => {
         ],
       };
     case "ON_DROP":
-      // const getSelectedDate = state.data.filter((todo: eachTask) => todo.id === action.id);
+      // const getSelectedDateIndex = state.data.filter((todo: eachTask) => todo.id === action.id);
+      const getSelectedDateIndex = state.data.findIndex((todo: eachTask) => todo.id === action.id);
+      state.data[getSelectedDateIndex].status = 'completed';
+      // console.log('selected date is: ', getSelectedDate)
+      // return {
+      //   ...state,
+      //   data: [
+      //     ...state.data.filter((todo: eachTask) => todo.id !== action.id),
+      //     { task: action.task, id: action.id, date: action.date, status: 'completed' },
+      //   ],
+      // }
       return {
         ...state,
         data: [
-          ...state.data.filter((todo: eachTask) => todo.id !== action.id),
-          { task: action.task, id: action.id, date: action.date, status: 'completed' },
+          ...state.data,
         ],
       }
     default:

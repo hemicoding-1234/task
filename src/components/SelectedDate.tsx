@@ -44,7 +44,10 @@ const SelectedDate = () => {
 
   const [, drop] = useDrop(() => ({
     accept: itemTypes.TASK,
-    drop: (item: ITEM, monitor) => completedTask(item.id),
+    drop: (item: any, monitor) => {
+      console.log('item is: ', item)
+      completedTask(item.id)
+    },
     collect: (monitor) => ({
       isDragging: !!monitor.isOver()
     })

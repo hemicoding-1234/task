@@ -11,3 +11,9 @@
   border: solid;
   border-color: orange;
 } */
+
+#selectedDateID {
+  border: solid;
+  border-color: brown;
+  padding: 0.5em;
+}

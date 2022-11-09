@@ -29,6 +29,9 @@ const TodoItemDate = ({ task, selectedDate }: any) => {
 
   const [{ isDragging }, drag] = useDrag(() => ({
     type: itemTypes.TASK,
+    item: {
+      status: task.status
+    },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging()
     })
@@ -59,8 +62,8 @@ const TodoItemDate = ({ task, selectedDate }: any) => {
         </div>
         <div>
           Task: {task.task}
-          {editFlag ? <button className="ui button" onClick={() => setIsUpdate(true)}>Edit</button> : <button className="ui button" disabled onClick={() => setIsUpdate(true)}>Edit</button>}
-          <button className="ui button" onClick={() => dispatch(deleteTodo(task.id))}>Delete</button>
+          {/* {editFlag ? <button className="ui button" onClick={() => setIsUpdate(true)}>Edit</button> : <button className="ui button" disabled onClick={() => setIsUpdate(true)}>Edit</button>} */}
+          {/* <button className="ui button" onClick={() => dispatch(deleteTodo(task.id))}>Delete</button> */}
         </div>
       </ div>
     );
@@ -71,7 +74,7 @@ const TodoItemDate = ({ task, selectedDate }: any) => {
       <div ref={drag}>
         <br></br>
         <>
-          {selectedDate === task.date ? <div>{isUpdate ? renderForm() : renderItem()}</div> : null}
+          {selectedDate === task.date ? <div id="selectedDateID">{isUpdate ? renderForm() : renderItem()}</div> : null}
         </>
       </div>
     </div>
