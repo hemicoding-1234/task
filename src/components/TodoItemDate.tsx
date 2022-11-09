@@ -30,7 +30,7 @@ const TodoItemDate = ({ task, selectedDate }: any) => {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: itemTypes.TASK,
     item: {
-      status: task.status
+      id: task.id
     },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging()
