@@ -66,7 +66,7 @@ const TodoItemDate2 = ({ task, selectedDate }: any) => {
       <div ref={drag}>
         <br></br>
         <>
-          {selectedDate === task.date ? <div>{isUpdate ? renderForm() : renderItem()}</div> : null}
+          {selectedDate === task.date && task.status === 'completed' ? <div>{isUpdate ? renderForm() : renderItem()}</div> : null}
         </>
       </div>
     </div>

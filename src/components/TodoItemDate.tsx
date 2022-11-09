@@ -55,7 +55,7 @@ const TodoItemDate = ({ task, selectedDate }: any) => {
     return (
       <div id="renderTodoItemDate">
         <div>
-          Date: {task.date}
+          Date: {task.date} and Status: {task.status}
         </div>
         <div>
           Task: {task.task}

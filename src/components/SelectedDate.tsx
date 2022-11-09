@@ -10,6 +10,7 @@ import { onDrop } from "../actions";
 interface ITEM {
   id: string
 }
+
 const SelectedDate = () => {
   const [selectedDate, setSelectedDate] = useState('');
   const taskobj = useSelector((state: any) => state.todos.data);
@@ -29,7 +30,7 @@ const SelectedDate = () => {
   })
 
   const matchedDatetaskobjCompleted = taskobj.map((task: any) => {
-
+    console.log('dropping')
     return (
       <div id="selectedDateTask">
         <TodoItemDate2 key={task.id} task={task} selectedDate={selectedDate} />
@@ -40,6 +41,7 @@ const SelectedDate = () => {
   const completedTask = (id: string) => {
     dispatch(onDrop(id))
   }
+
   const [, drop] = useDrop(() => ({
     accept: itemTypes.TASK,
     drop: (item: ITEM, monitor) => completedTask(item.id),

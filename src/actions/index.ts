@@ -57,3 +57,11 @@ export const onDrop = (id: string) => ({
   type: "ON_DROP",
   id,
 })
+
+// export const onDrop = ({ task, id, date, status }: eachTask) => ({
+//   type: "ON_DROP",
+//   task,
+//   id,
+//   date,
+//   status
+// })
