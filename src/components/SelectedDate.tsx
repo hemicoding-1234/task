@@ -1,12 +1,19 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import TodoItemDate from "./TodoItemDate";
+import TodoItemDate2 from "./TodoItemDate2";
 import "./SelectedDate.css";
+import { useDrop } from "react-dnd";
+import { itemTypes } from "../enums";
+import { onDrop } from "../actions";
 
+interface ITEM {
+  id: string
+}
 const SelectedDate = () => {
   const [selectedDate, setSelectedDate] = useState('');
   const taskobj = useSelector((state: any) => state.todos.data);
-
+  const dispatch = useDispatch();
   let value = '';
   const handleDate = (event: React.ChangeEvent<HTMLInputElement>) => {
     value = event.target.value;
@@ -21,14 +28,26 @@ const SelectedDate = () => {
     )
   })
 
-  const matchedDatetaskobjComplete = taskobj.map((task: any) => {
+  const matchedDatetaskobjCompleted = taskobj.map((task: any) => {
 
     return (
       <div id="selectedDateTask">
-        <TodoItemDate key={task.id} task={task} selectedDate={selectedDate} />
+        <TodoItemDate2 key={task.id} task={task} selectedDate={selectedDate} />
       </div>
     )
   })
+
+  const completedTask = (id: string) => {
+    dispatch(onDrop(id))
+  }
+  const [, drop] = useDrop(() => ({
+    accept: itemTypes.TASK,
+    drop: (item: ITEM, monitor) => completedTask(item.id),
+    collect: (monitor) => ({
+      isDragging: !!monitor.isOver()
+    })
+  }))
+
   return (
     <div id="hi">
       <div>
@@ -48,9 +67,9 @@ const SelectedDate = () => {
         {matchedDatetaskobj}
       </div>
       <br></br>
-      <div id="completedTask">
+      <div ref={drop} id="completedTask">
         Completed Tasks:
-        {matchedDatetaskobjComplete}
+        {matchedDatetaskobjCompleted}
       </div>
     </div>
   );

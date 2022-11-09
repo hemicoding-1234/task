@@ -5,7 +5,7 @@ import "./TodoItemDate.css";
 import { useDrag } from 'react-dnd';
 import { itemTypes } from "../enums";
 
-const TodoItemDate = ({ task, selectedDate }: any) => {
+const TodoItemDate2 = ({ task, selectedDate }: any) => {
   const [isUpdate, setIsUpdate] = useState(false);
   const dispatch = useDispatch();
   const [updatedText, setUpdatedText] = useState('');
@@ -21,11 +21,6 @@ const TodoItemDate = ({ task, selectedDate }: any) => {
     dispatch(updateTodo({ task: updatedText, id: task.id, date: task.date, status: task.status }));
     setIsUpdate(false);
   }
-
-  // const dragStared = (e: React.DragEvent<HTMLDivElement>, id: string) => {
-  //   console.log('drag started')
-  //   e.dataTransfer.setData("id", id)
-  // }
 
   const [{ isDragging }, drag] = useDrag(() => ({
     type: itemTypes.TASK,
@@ -78,4 +73,4 @@ const TodoItemDate = ({ task, selectedDate }: any) => {
   );
 };
 
-export default TodoItemDate;
+export default TodoItemDate2;

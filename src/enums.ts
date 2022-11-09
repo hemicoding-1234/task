@@ -3,3 +3,7 @@ export enum actionTypes {
   "UPDATE_TODO",
   "DELETE_TODO",
 };
+
+export const itemTypes = {
+  TASK: "task"
+}
