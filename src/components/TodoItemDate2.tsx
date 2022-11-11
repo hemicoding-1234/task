@@ -4,7 +4,7 @@ import { deleteTodo, updateTodo } from "../actions";
 import "./TodoItemDate.css";
 import { useDrag } from 'react-dnd';
 import { itemTypes } from "../enums";
-
+import "./TodoItemDate2.css"
 const TodoItemDate2 = ({ task, selectedDate }: any) => {
   const [isUpdate, setIsUpdate] = useState(false);
   const dispatch = useDispatch();
@@ -54,20 +54,17 @@ const TodoItemDate2 = ({ task, selectedDate }: any) => {
         </div>
         <div>
           Task: {task.task}
-          {editFlag ? <button className="ui button" onClick={() => setIsUpdate(true)}>Edit</button> : <button className="ui button" disabled onClick={() => setIsUpdate(true)}>Edit</button>}
-          <button className="ui button" onClick={() => dispatch(deleteTodo(task.id))}>Delete</button>
+          {/* {editFlag ? <button className="ui button" onClick={() => setIsUpdate(true)}>Edit</button> : <button className="ui button" disabled onClick={() => setIsUpdate(true)}>Edit</button>}
+          <button className="ui button" onClick={() => dispatch(deleteTodo(task.id))}>Delete</button> */}
         </div>
       </ div>
     );
   };
 
   return (
-    <div>
+    <div id="completedDiv2">
       <div ref={drag}>
-        <br></br>
-        <>
-          {selectedDate === task.date && task.status === 'completed' ? <div>{isUpdate ? renderForm() : renderItem()}</div> : null}
-        </>
+        {selectedDate === task.date && task.status === 'completed' ? <div id='completedDiv'>{isUpdate ? renderForm() : renderItem()}</div> : null}
       </div>
     </div>
   );

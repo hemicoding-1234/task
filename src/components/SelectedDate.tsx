@@ -44,7 +44,7 @@ const SelectedDate = () => {
 
   const [, drop] = useDrop(() => ({
     accept: itemTypes.TASK,
-    drop: (item: any, monitor) => {
+    drop: (item: ITEM, monitor) => {
       console.log('item is: ', item)
       completedTask(item.id)
     },
