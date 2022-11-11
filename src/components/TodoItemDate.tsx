@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteTodo, updateTodo } from "../actions";
 import "./TodoItemDate.css";
@@ -9,23 +9,25 @@ const TodoItemDate = ({ task, selectedDate }: any) => {
   const [isUpdate, setIsUpdate] = useState(false);
   const dispatch = useDispatch();
   const [updatedText, setUpdatedText] = useState('');
-  const [editFlag, setEditFlag] = useState(true);
+  const [flagTimeDate, setFlagTimeDate] = useState(true);
+
+  var currentTime = new Date().toLocaleTimeString();
   const currentDate = new Date().toISOString().split("T")[0];
 
-  if (task.date < currentDate) {
-    setEditFlag(false);
-  }
+  useEffect(() => {
+    if (task.time < currentTime || task.date < currentDate) {
+      setFlagTimeDate(false);
+    }
+    console.log('time')
+    currentTime = new Date().toLocaleTimeString();
+  }, [currentTime])
+
 
   function editItemToState(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    dispatch(updateTodo({ task: updatedText, id: task.id, date: task.date, status: task.status }));
+    dispatch(updateTodo({ task: updatedText, id: task.id, date: task.date, time: task.time, status: task.status }));
     setIsUpdate(false);
   }
-
-  // const dragStared = (e: React.DragEvent<HTMLDivElement>, id: string) => {
-  //   console.log('drag started')
-  //   e.dataTransfer.setData("id", id)
-  // }
 
   const [{ isDragging }, drag] = useDrag(() => ({
     type: itemTypes.TASK,
@@ -58,12 +60,14 @@ const TodoItemDate = ({ task, selectedDate }: any) => {
     return (
       <div id="renderTodoItemDate">
         <div>
-          Date: {task.date} and Status: {task.status}
+          Date: {task.date} <br></br>
+          Time: {task.time} <br></br>
+          Status: {task.status} <br></br>
         </div>
         <div>
           Task: {task.task}
-          {/* {editFlag ? <button className="ui button" onClick={() => setIsUpdate(true)}>Edit</button> : <button className="ui button" disabled onClick={() => setIsUpdate(true)}>Edit</button>} */}
-          {/* <button className="ui button" onClick={() => dispatch(deleteTodo(task.id))}>Delete</button> */}
+          {flagTimeDate ? <button className="ui button" onClick={() => setIsUpdate(true)}>Edit</button> : <button className="ui button" disabled onClick={() => setIsUpdate(true)}>Edit</button>}
+          {flagTimeDate ? <button className="ui button" onClick={() => dispatch(deleteTodo(task.id))}>Delete</button> : <button className="ui button" disabled={true} onClick={() => dispatch(deleteTodo(task.id))}>Delete</button>}
         </div>
       </ div>
     );
@@ -73,9 +77,9 @@ const TodoItemDate = ({ task, selectedDate }: any) => {
     <div>
       <div ref={drag}>
         <br></br>
-        <>
-          {selectedDate === task.date ? <div id="selectedDateID">{isUpdate ? renderForm() : renderItem()}</div> : null}
-        </>
+        {/* Current time : {currentTime} */}
+        <br></br>
+        {selectedDate === task.date && task.status === 'incomplete' ? <div id="selectedDateID">{isUpdate ? renderForm() : renderItem()}</div> : null}
       </div>
     </div>
   );

@@ -7,12 +7,14 @@ export interface eachTask {
   task: string
   id: string,
   date: string,
+  time: string,
   status: string
 }
 
 const AddTodo = () => {
   const [text, setText] = useState('');
   const [todoDate, setTodoDate] = useState('');
+  const [todoTime, setTodoTime] = useState('');
   const dispatch = useDispatch();
   const currentDate = new Date().toISOString().split("T")[0];
 
@@ -25,7 +27,7 @@ const AddTodo = () => {
     if (todoDate < currentDate) {
       alert("Please enter correct date");
     } else {
-      dispatch(addTodo({ task: text, id: cuid(), date: todoDate, status: 'incomplete' }))
+      dispatch(addTodo({ task: text, id: cuid(), date: todoDate, time: todoTime, status: 'incomplete', }))
       setText('');
       setTodoDate('');
     }
@@ -33,6 +35,10 @@ const AddTodo = () => {
 
   const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTodoDate(event.target.value);
+  }
+
+  const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTodoTime(event.target.value);
   }
 
   return (
@@ -46,6 +52,14 @@ const AddTodo = () => {
                 type="date"
                 onChange={handleDateChange}
                 value={todoDate}
+              />
+              <input
+                id="appt-time"
+                type="time"
+                name="appt-time"
+                step={2}
+                onChange={handleTimeChange}
+                value={todoTime}
               />
             </div>
           </div>

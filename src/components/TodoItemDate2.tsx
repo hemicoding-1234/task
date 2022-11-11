@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { deleteTodo, updateTodo } from "../actions";
+import { updateTodo } from "../actions";
 import "./TodoItemDate.css";
 import { useDrag } from 'react-dnd';
 import { itemTypes } from "../enums";
@@ -18,7 +18,7 @@ const TodoItemDate2 = ({ task, selectedDate }: any) => {
 
   function editItemToState(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    dispatch(updateTodo({ task: updatedText, id: task.id, date: task.date, status: task.status }));
+    dispatch(updateTodo({ task: updatedText, id: task.id, date: task.date, time: task.time, status: task.status }));
     setIsUpdate(false);
   }
 
@@ -50,12 +50,10 @@ const TodoItemDate2 = ({ task, selectedDate }: any) => {
     return (
       <div id="renderTodoItemDate">
         <div>
-          Date: {task.date}
-        </div>
-        <div>
+          Date: {task.date} <br></br>
+          Time: {task.time} <br></br>
+          Status: {task.status} <br></br>
           Task: {task.task}
-          {/* {editFlag ? <button className="ui button" onClick={() => setIsUpdate(true)}>Edit</button> : <button className="ui button" disabled onClick={() => setIsUpdate(true)}>Edit</button>}
-          <button className="ui button" onClick={() => dispatch(deleteTodo(task.id))}>Delete</button> */}
         </div>
       </ div>
     );

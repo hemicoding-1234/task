@@ -6,12 +6,14 @@ import { actionTypesNames } from "../enums";
 const initialState = {
   data: [],
   date: '',
-  status: 'incomplete'
+  time: '',
+  status: 'incomplete',
 };
 
 export interface TaskArray {
   data: eachTask[],
   date: string,
+  time: string,
   status: string
 }
 
@@ -22,6 +24,7 @@ const todos = (state: TaskArray = initialState, action: ActionTypes) => {
         ...state,
         data: [...state.data, action.payload],
         date: action.payload.date,
+        time: action.payload.time,
         status: 'incomplete'
       };
     case actionTypesNames.DELETE_TODO:
@@ -40,17 +43,8 @@ const todos = (state: TaskArray = initialState, action: ActionTypes) => {
         ],
       };
     case actionTypesNames.ON_DROP:
-      // const getSelectedDateIndex = state.data.filter((todo: eachTask) => todo.id === action.id);
       const getSelectedDateIndex = state.data.findIndex((todo: eachTask) => todo.id === action.id);
       state.data[getSelectedDateIndex].status = 'completed';
-      // console.log('selected date is: ', getSelectedDate)
-      // return {
-      //   ...state,
-      //   data: [
-      //     ...state.data.filter((todo: eachTask) => todo.id !== action.id),
-      //     { task: action.task, id: action.id, date: action.date, status: 'completed' },
-      //   ],
-      // }
       return {
         ...state,
         data: [
